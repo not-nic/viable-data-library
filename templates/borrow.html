@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="borrow">
+    <h3>Which of our available book(s) would you like to borrow?</h3>
+    {% for book in books %}
+    <div class="book">
+        <h2>{{ book.title }}</h2>
+        <p>{{ book.description }}</p>
+        <span>{{ book.image_url }}</span>
+        <form method="POST" action="/library/borrow">
+            <input type="hidden" name="selected_book" value="{{ book.title }}">
+            <button type="submit">Borrow this book</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

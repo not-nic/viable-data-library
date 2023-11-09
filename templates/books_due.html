@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="due">
+    <h3>Books due and overdue</h3>
+    {% for book in books %}
+    <div class="book">
+        <h2 style="color: red">{{ book.return_date.strftime("%d-%m-%y") }} | {{ book.title }}</h2>
+        <p>{{ book.description }}</p>
+        <span>{{ book.image_url }}</span>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

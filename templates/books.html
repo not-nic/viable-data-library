@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="available">
+    <h3>Viable Data Available Books</h3>
+    {% for book in books %}
+    <div class="book">
+        <h2>{{ book.title }} | Status: {% if book.is_borrowed %} Borrowed {% else %} Available {% endif %}</h2>
+        <p>{{ book.description }}</p>
+        <span>{{ book.image_url }}</span>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

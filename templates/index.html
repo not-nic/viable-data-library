@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Viable Data Library</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding-top: 20px;
+
+            background-color: #3f51b5;
+            color: white;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 900;
+            border: none;
+            background-color: #3f51b5;
+            color: white;
+            transition: background-color 0.5s ease;
+        }
+
+        button:hover {
+            background-color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="../static/logo.svg" alt="viable data logo">
+        <h1>Staff Library</h1>
+    </div>
+    <div class="buttons">
+        <button onclick="location.href=`{{ url_for('library_blueprint.borrow_book') }}`">Borrow a book</button>
+        <button onclick="location.href=`{{ url_for('library_blueprint.due_today') }}`">Check books due</button>
+        <button onclick="location.href=`{{ url_for('library_blueprint.available_books') }}`">Available Books</button>
+        <button onclick="location.href=`{{ url_for('library_blueprint.borrowed_books') }}`">Borrowed Books</button>
+        <button onclick="location.href=`{{ url_for('library_blueprint.all_books') }}`">All Books</button>
+        <a href="{{url_for('auth_blueprint.logout')}}">Logout</a>
+    </div>
+    <div class="container">
+        {% block content %} {% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="books">
+    {% for book, borrower in books %}
+    <div class="book">
+        <!-- Book Information -->
+        <h2>{{ book.title }} | Status: {% if book.is_borrowed %} Borrowed {% else %} Available {% endif %}</h2>
+        <p>Description: {{ book.description }}</p>
+        <img>{{ book.image_url }}</img>
+        <!-- Borrower Information -->
+        <h3></h3>
+        {% if book.is_borrowed and borrower %}
+        <div>
+            <h4>Borrower Details:</h4>
+            <p>First name: {{ borrower.first_name }}</p>
+            <p>Last name: {{ borrower.last_name }}</p>
+            <p>Email Address: ({{ borrower.email_address }})</p>
+            <p>Expected return date: {{book.return_date }}</p>
+        </div>
+        {% elif book.is_borrowed %}
+        <p>Borrower: Not available</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
