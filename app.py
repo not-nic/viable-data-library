@@ -8,7 +8,7 @@ from flask_bcrypt import Bcrypt
 database = SQLAlchemy()
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.urandom(24)
-app.config["SQLALCHEMY_DATABASE_URI"] = "YOUR_MYSQL_DATABASE_URL_HERE"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://mysql:password@172.19.0.2:3306/viable-data"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 login_manager = LoginManager(app)

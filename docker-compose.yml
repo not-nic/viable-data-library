@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: viable-data
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    networks:
+      app-network:
+        ipv4_address: 172.19.0.2
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: flask-app
+    depends_on:
+      - mysql
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16
