@@ -18,6 +18,17 @@ The application works within the browser and a tool like postman, if you would l
 - Library/borrowed – return all borrowed books
 - Library/due – return a user’s books that are due today or are overdue.
 - Library/borrow – allows a user to borrow a book
+## Run with Docker
+1. Clone this repository or download the files.
+```bash
+git clone https://github.com/not-nic/viable-data-library.git
+cd viable-data-library
+```
+2. Run docker compose build.
+```bash
+docker compose up --build
+```
+Note: I have hardcoded the MySQL container IP address in docker-compose.yml to match the app.py python file. so it runs 'out of the box'.
 ## Install Guide
 1. Clone this repository or download the files.
 ```bash
@@ -33,7 +44,7 @@ $ pip install -r requirements.txt
 $ docker run --name mysql -e MYSQL_ROOT_PASSWORD=password -d mysql:latest
 $ docker start mysql
 $ sudo nano app.py
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://user:password@localhost:3306/viable-data"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://mysql:password@172.19.0.2:3306/viable-data"
 ```
 4. Start a flask shell and seed the database with random users and books.
 ```bash
@@ -44,9 +55,9 @@ flask shell
 >>> database.session.add(User(first_name='Waylon', last_name='Smithers', email_address='waylonS@example.com', password='password2')) 
 >>> database.session.add(User(first_name='Krusty', last_name='The Clown', email_address='Krusty@example.com', password='password3'))
 >>> database.session.commit()
->>> database.session.add(Book(image_url='example.com/book1.jpg', title='I, Robot', description='By Isaac Asimov.', is_borrowed=True, borrower='nflanders1@email.com', return_date='09-11-2023')
->>> database.session.add(Book(image_url='example.com/book2.jpg', title='Esio Trot', description='By R Dahl.')
->>> database.session.add(Book(image_url='example.com/book3.jpg', title='Fantastic Mr. Fox', description='By R Dahl.')
+>>> database.session.add(Book(image_url='example.com/book1.jpg', title='I, Robot', description='By Isaac Asimov.', is_borrowed=True, borrower='nflanders1@email.com', return_date='2023-11-09'))
+>>> database.session.add(Book(image_url='example.com/book2.jpg', title='Esio Trot', description='By R Dahl.'))
+>>> database.session.add(Book(image_url='example.com/book3.jpg', title='Fantastic Mr. Fox', description='By R Dahl.'))
 >>> database.session.commit()
 >>> exit()
 ```
